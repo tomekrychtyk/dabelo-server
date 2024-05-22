@@ -4,6 +4,13 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { DirectiveLocation, GraphQLDirective } from 'graphql';
 import { upperDirectiveTransformer } from './common/directives/upper-case.directive';
 import { RecipesModule } from './recipes/recipes.module';
+import { GraphQLExecutionContext } from '@nestjs/graphql';
+import { Request, Response } from 'express';
+
+export type GraphQLContext = GraphQLExecutionContext & {
+  req: Request;
+  res: Response;
+};
 
 @Module({
   imports: [
@@ -20,6 +27,15 @@ import { RecipesModule } from './recipes/recipes.module';
             locations: [DirectiveLocation.FIELD_DEFINITION],
           }),
         ],
+      },
+      context: ({ req, res }) => {
+        return {
+          req,
+          res,
+          db: {
+            foo: 'bar',
+          },
+        };
       },
     }),
   ],

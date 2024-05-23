@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { DirectiveLocation, GraphQLDirective } from 'graphql';
 import { upperDirectiveTransformer } from './common/directives/upper-case.directive';
-import { RecipesModule } from './recipes/recipes.module';
+import { DietProductsModule } from './modules';
 import { GraphQLExecutionContext } from '@nestjs/graphql';
 import { Request, Response } from 'express';
 
@@ -14,7 +14,7 @@ export type GraphQLContext = GraphQLExecutionContext & {
 
 @Module({
   imports: [
-    RecipesModule,
+    DietProductsModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
@@ -27,15 +27,6 @@ export type GraphQLContext = GraphQLExecutionContext & {
             locations: [DirectiveLocation.FIELD_DEFINITION],
           }),
         ],
-      },
-      context: ({ req, res }) => {
-        return {
-          req,
-          res,
-          db: {
-            foo: 'bar',
-          },
-        };
       },
     }),
   ],

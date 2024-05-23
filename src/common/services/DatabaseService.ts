@@ -15,8 +15,6 @@ export class DatabaseService {
     const { MONGO_DB_PASSWORD, MONGO_DB_USER, MONGO_DB_DATABASE } = process.env;
     const uri = `mongodb+srv://${MONGO_DB_USER}:${MONGO_DB_PASSWORD}@dabelodev.idkrnwe.mongodb.net/?retryWrites=true&w=majority&appName=${MONGO_DB_DATABASE}`;
 
-    console.log(uri);
-
     const client = new MongoClient(uri, {
       serverApi: {
         version: ServerApiVersion.v1,
@@ -35,6 +33,7 @@ export class DatabaseService {
       );
       this.dbHandle = client.db(MONGO_DB_DATABASE);
     } catch (e) {
+      console.log('[DatabaseService] [Error] ', e);
       // Ensures that the client will close when you finish/error
       await client.close();
     }

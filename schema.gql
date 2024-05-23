@@ -16,6 +16,24 @@ type DietProduct {
   vitD: Int
   vitE: Int
   vitK: Int
+  vitC: Int
+  vitB1: Int
+  vitB2: Int
+  vitB3: Int
+  vitB5: Int
+  vitB6: Int
+  vitB7: Int
+  vitB9: Int
+  vitB12: Int
+  potassium: Int
+  calcium: Int
+  phosphorus: Int
+  magnessium: Int
+  iron: Int
+  zinc: Int
+  copper: Int
+  manganium: Int
+  selenium: Int
 }
 
 type Query {
@@ -23,5 +41,35 @@ type Query {
 }
 
 type Mutation {
-  addDietProduct: DietProduct!
+  addDietProduct(CreateDietProductInput: CreateDietProductInput!): DietProduct!
+}
+
+input CreateDietProductInput {
+  name: String!
+  kcal: Int!
+  proteins: Int!
+  carbs: Int!
+  fat: Int!
+  vitA: Int
+  vitD: Int
+  vitE: Int
+  vitK: Int
+  vitC: Int
+  vitB1: Int
+  vitB2: Int
+  vitB3: Int
+  vitB5: Int
+  vitB6: Int
+  vitB7: Int
+  vitB9: Int
+  vitB12: Int
+  potassium: Int
+  calcium: Int
+  phosphorus: Int
+  magnesium: Int
+  iron: Int
+  zinc: Int
+  copper: Int
+  manganium: Int
+  selenium: Int
 }
